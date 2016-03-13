@@ -1,34 +1,35 @@
 # 专辑: (中文V2)Android 性能模式 第一季
 
-* 第一节 [Rendering Performance](http://chinagdg.org/google-videos/?vid=XMTQ5ODk1Njk4NA==&plid=26876905)
-  1. 系统试图每16ms就对Activity进行重绘，所以要求你的应用需要在16ms之内运行所有相关的逻辑来更新屏幕。
-  2. 如果花了24ms，则会出现丢帧的现象。系统会在32ms之内呈现同一帧画面。
-  3. Hierarchy Viewer、Trace View
+## notes
 
-
-* 第二节 [Understanding VSYNC](http://chinagdg.org/google-videos/?vid=XMTQ5ODk1NTE3Ng==&plid=26876905)
-  1. Refresh Rate 刷新频率，赫兹，通常取决于硬件
-  2. Frame Rage GPU每秒可以绘制的帧数 30 或 60
-  3. GPU获取数据并进行绘制，硬件会将其输出转到屏幕，这一过程反复发生。
-  4. 双缓冲技术
-
-
-* 第三节 [Profile GPU Rendering](http://chinagdg.org/google-videos/?vid=XMTQ5ODk1MzU2OA==&plid=26876905)
-  1. setting - Develop options - Profile GPU Rendering - On Screen As Bars
-  2. 每一个垂直栏目代表了一帧的渲染。高度越高代表渲染时间越长。
-  3. 绿色线代表16ms，要达到60fps，则必须保证每一个垂直栏目都需要在绿线下方，否则会出现卡顿。
-  4. 蓝色：代表绘制时间，java花了多长时间来生成并更新你的显示列表。蓝色突然变高，代表一堆视图可能突然无效 或者 一些
-  自定义视图的onDraw方法中包含了某些特別复杂的逻辑。
-  5. 红色：代表执行时间，2D渲染执行显示列表时消耗的时间。红色升高，说明需要过于
-  复杂的OpenGL绘制。密集的高峰可能是重复上传大量视图进行重新绘制造成的。
-  6. 橘色：代表处理时间。CPU告诉GPU完成了一帧的渲染。
-
-* 第四节 [Why 60fps?](http://chinagdg.org/google-videos/?vid=XMTQ5ODk1NjM3Ng==&plid=26876905)
-  1. 至少需要10 - 12 帧
-  2. 60 ：大部分人接受不了更高的帧数；足够流畅
+  * 第一节 [Rendering Performance](http://chinagdg.org/google-videos/?vid=XMTQ5ODk1Njk4NA==&plid=26876905)
+    1. 系统试图每16ms就对Activity进行重绘，所以要求你的应用需要在16ms之内运行所有相关的逻辑来更新屏幕。
+    2. 如果花了24ms，则会出现丢帧的现象。系统会在32ms之内呈现同一帧画面。
+    3. Hierarchy Viewer、Trace View
   
-* 第五节 [Android UI and the GPU](http://chinagdg.org/google-videos/?vid=XMTQ5ODk1NjAyMA==&plid=26876905)
-  1. 光栅化：将一个高级对象（线，按钮，路径，或形状等）转化成纹理像素，或显示在你的屏幕上。
-  2. 光栅化很耗时，所以需要GPU加速光栅化过程。
-  3. 首先在CPU内转换成像素和纹理，送至GPU进行光栅化。其中CPU上传GPU也不是很快的过程。
-  4. 
+  
+  * 第二节 [Understanding VSYNC](http://chinagdg.org/google-videos/?vid=XMTQ5ODk1NTE3Ng==&plid=26876905)
+    1. Refresh Rate 刷新频率，赫兹，通常取决于硬件
+    2. Frame Rage GPU每秒可以绘制的帧数 30 或 60
+    3. GPU获取数据并进行绘制，硬件会将其输出转到屏幕，这一过程反复发生。
+    4. 双缓冲技术
+  
+  
+  * 第三节 [Profile GPU Rendering](http://chinagdg.org/google-videos/?vid=XMTQ5ODk1MzU2OA==&plid=26876905)
+    1. setting - Develop options - Profile GPU Rendering - On Screen As Bars
+    2. 每一个垂直栏目代表了一帧的渲染。高度越高代表渲染时间越长。
+    3. 绿色线代表16ms，要达到60fps，则必须保证每一个垂直栏目都需要在绿线下方，否则会出现卡顿。
+    4. 蓝色：代表绘制时间，java花了多长时间来生成并更新你的显示列表。蓝色突然变高，代表一堆视图可能突然无效 或者 一些
+    自定义视图的onDraw方法中包含了某些特別复杂的逻辑。
+    5. 红色：代表执行时间，2D渲染执行显示列表时消耗的时间。红色升高，说明需要过于
+    复杂的OpenGL绘制。密集的高峰可能是重复上传大量视图进行重新绘制造成的。
+    6. 橘色：代表处理时间。CPU告诉GPU完成了一帧的渲染。
+  
+  * 第四节 [Why 60fps?](http://chinagdg.org/google-videos/?vid=XMTQ5ODk1NjM3Ng==&plid=26876905)
+    1. 至少需要10 - 12 帧
+    2. 60 ：大部分人接受不了更高的帧数；足够流畅
+    
+  * 第五节 [Android UI and the GPU](http://chinagdg.org/google-videos/?vid=XMTQ5ODk1NjAyMA==&plid=26876905)
+    1. 光栅化：将一个高级对象（线，按钮，路径，或形状等）转化成纹理像素，或显示在你的屏幕上。
+    2. 光栅化很耗时，所以需要GPU加速光栅化过程。
+    3. 首先在CPU内转换成像素和纹理，送至GPU进行光栅化。其中CPU上传GPU也不是很快的过程。
